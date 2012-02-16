@@ -13,6 +13,7 @@ USAGE
 =====
 
 ::
+
 	bean-fetcher [-c <configuration_path> ]
 
 Default configuration is **/usr/local/etc/bean-fetcher.ini**
@@ -23,6 +24,7 @@ CONFIGURATION
 Here is a simple config:
 
 ::
+
 	[instance1]
 	host = 127.0.0.1
 	port = 11302
