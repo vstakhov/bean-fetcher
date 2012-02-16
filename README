@@ -1,0 +1,45 @@
+DESCRIPTION
+===========
+
+Bean fetcher is a simple utility to fetch jobs from beanstalk server.
+
+INSTALLATION
+============
+
+Use python setuptools:
+# python setup.py install
+
+USAGE
+=====
+
+bean-fetcher [-c <configuration_path> ]
+
+Default configuration is /usr/local/etc/bean-fetcher.ini
+
+CONFIGURATION
+=============
+
+Here is a simple config:
+
+[instance1]
+host = 127.0.0.1
+port = 11302
+command = /usr/local/bin/some_command -h -t %%t
+workers = 4
+user = nobody
+
+[instance2]
+port = 11303
+file = /path/to/file
+
+If host is ommitted then 'localhost' is used. If port is ommitted
+then 11300 is used. If argument is %t then it is replaced by current date
+in format '%Y-%m-%d'. If user is ommitted than command is started without
+user's changing.
+
+TODO
+====
+
+- Add more options.
+- Add errors handling.
+- Add timeouts.

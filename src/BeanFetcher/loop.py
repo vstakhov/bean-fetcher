@@ -31,7 +31,7 @@ class FetchWorker(Process):
         Read a single argument for a 'magic' value
         '''
         if arg == '%t':
-            return time.strftime('format')
+            return time.strftime('%Y-%m-%d')
         return arg
     
     def run(self):
