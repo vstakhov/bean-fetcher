@@ -51,6 +51,10 @@ class FetchWorker(Process):
                 beanstalk = beanstalkc.Connection(host=self.instance['host'],
                                               port=self.instance['port'],
                                               parse_yaml=False)
+                if 'tube' in self.instance:
+                    # use tube
+                    beanstalk.watch(self.instance['tube'])
+                    beanstalk.ignore('default')
                 job = beanstalk.reserve()
                 if 'command' in self.instance:
                     # Execute command

@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
         name='bean-fetcher',
-        version='0.0.1',
+        version='0.0.2',
         author="Vsevolod Stakhov",
         author_email="vsevolod@highsecure.ru",
         maintainer="Vsevolod Stakhov",

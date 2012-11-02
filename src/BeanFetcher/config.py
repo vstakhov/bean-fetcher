@@ -35,6 +35,8 @@ class BeanConfig(object):
                             'file': '/dev/null'}
                 if config.has_option(s, 'host'):
                     instance['host'] = config.get(s, 'host')
+                if config.has_option(s, 'tube'):
+                    instance['tube'] = config.get(s, 'tube')
                 if config.has_option(s, 'port'):
                     instance['port'] = int(config.getint(s, 'port'))
                 if config.has_option(s, 'workers'):

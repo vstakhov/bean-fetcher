@@ -38,11 +38,12 @@ Here is a simple config:
 	[instance2]
 	port = 11303
 	file = /path/to/file
+	tube = test
 
-If host is ommitted then 'localhost' is used. If port is ommitted
+If host is omitted then 'localhost' is used. If port is omitted
 then 11300 is used. If argument is %t then it is replaced by current date
-in format '%Y-%m-%d'. If user is ommitted than command is started without
-user's changing.
+in format '%Y-%m-%d'. If user is omitted then command is started without
+user's changing. If tube is omitted then 'default' tube is used.
 
 TODO
 ====
