@@ -11,7 +11,7 @@ setup(
         maintainer="Vsevolod Stakhov",
         maintainer_email="vsevolod@highsecure.ru",
         contact_email="vsevolod@highsecure.ru",
-        url='http://bitbucket.org/vstakhov/bean-fetcher',
+        url='https://bitbucket.org/vstakhov/bean-fetcher',
         packages=find_packages('src'),
         package_dir = {'':'src'},
         scripts=['script/bean-fetcher'],

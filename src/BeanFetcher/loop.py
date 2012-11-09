@@ -43,7 +43,7 @@ class FetchWorker(Process):
             os.setuid(uid)
             #os.setgid(gid)
         if 'command' in self.instance:
-            args = filter(self.parse_arg, shlex.split(self.instance['command']))
+            args = map(self.parse_arg, shlex.split(self.instance['command']))
         while not self.wanna_die:
             fnull = open(os.devnull, 'w')
             # Fetch forever
