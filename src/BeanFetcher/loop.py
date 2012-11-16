@@ -75,7 +75,7 @@ class FetchWorker(Process):
                         server.sendmail(fromaddr, toaddrs, job.body)
                         server.quit()
                     except Exception as e:
-                        logging.warning('Catched smtp exception while running: %s' % str(e)))
+                        logging.warning('Catched smtp exception while running: %s' % str(e))
                 job.delete()
                 beanstalk.close()
             except beanstalkc.BeanstalkcException as e:
