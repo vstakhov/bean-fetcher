@@ -45,6 +45,7 @@ class BeanConfig(object):
                     instance['command'] = config.get(s, 'command')
                 if config.has_option(s, 'smtp'):
                     instance['smtp'] = config.get(s, 'smtp')
+                    del instance['file']
                     if config.has_option(s, 'smtp_from'):
                         instance['smtp_from'] = config.get(s, 'smtp_from')
                     else:
