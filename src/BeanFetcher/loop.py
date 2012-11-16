@@ -15,6 +15,7 @@ import sys
 import fcntl
 import os
 import pwd
+import smtplib
 from multiprocessing import Process
 
 class FetchWorker(Process):
@@ -66,6 +67,15 @@ class FetchWorker(Process):
                         fcntl.lockf(f.fileno(), fcntl.LOCK_EX)
                         f.write(job.body)
                         fcntl.lockf(f.fileno(), fcntl.LOCK_UN)
+                elif 'smtp' in self.instance:
+                    fromaddr = self.instance['smtp_from']
+                    toaddrs = self.instance['smtp_rcpt']
+                    try:
+                        server = smtplib.SMTP(self.instance['smtp'])
+                        server.sendmail(fromaddr, toaddrs, job.body)
+                        server.quit()
+                    except Exception as e:
+                        logging.warning('Catched smtp exception while running: %s' % str(e)))
                 job.delete()
                 beanstalk.close()
             except beanstalkc.BeanstalkcException as e:

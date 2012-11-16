@@ -43,6 +43,17 @@ class BeanConfig(object):
                     instance['workers'] = int(config.getint(s, 'workers'))
                 if config.has_option(s, 'command'):
                     instance['command'] = config.get(s, 'command')
+                if config.has_option(s, 'smtp'):
+                    instance['smtp'] = config.get(s, 'smtp')
+                    if config.has_option(s, 'smtp_from'):
+                        instance['smtp_from'] = config.get(s, 'smtp_from')
+                    else:
+                        instance['smtp_from'] = 'beanstalk@example.com'
+                    if config.has_option(s, 'smtp_rcpt'):
+                        instance['smtp_rcpt'] = config.get(s, 'smtp_rcpt')
+                    else:
+                        instance['smtp_rcpt'] = 'postmaster@localhost'
+                        
                 if config.has_option(s, 'user'):
                     instance['user'] = config.get(s, 'user')
                 if config.has_option(s, 'file'):
