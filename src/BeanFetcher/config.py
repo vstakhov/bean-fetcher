@@ -6,6 +6,7 @@ Created on Feb 16, 2012
 
 import ConfigParser
 import logging
+import json
 
 class BeanConfig(object):
     '''
@@ -42,7 +43,12 @@ class BeanConfig(object):
                 if config.has_option(s, 'workers'):
                     instance['workers'] = int(config.getint(s, 'workers'))
                 if config.has_option(s, 'command'):
-                    instance['command'] = config.get(s, 'command')
+                    cmd = config.get(s, 'command')
+                    if cmd[0] == "[":
+                        instance['command'] = json.loads(cmd)
+                    else:
+                        instance['command'] = [cmd]
+
                 if config.has_option(s, 'smtp'):
                     instance['smtp'] = config.get(s, 'smtp')
                     del instance['file']

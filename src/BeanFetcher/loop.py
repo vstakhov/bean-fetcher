@@ -43,8 +43,6 @@ class FetchWorker(Process):
             (uid,gid) = pwd.getpwnam(self.instance['user'])[2:4]
             os.setuid(uid)
             #os.setgid(gid)
-        if 'command' in self.instance:
-            args = map(self.parse_arg, shlex.split(self.instance['command']))
         while not self.wanna_die:
             fnull = open(os.devnull, 'w')
             # Fetch forever
@@ -56,11 +54,16 @@ class FetchWorker(Process):
                     # use tube
                     beanstalk.watch(self.instance['tube'])
                     beanstalk.ignore('default')
+
                 job = beanstalk.reserve()
+
                 if 'command' in self.instance:
                     # Execute command
-                    prg = subprocess.Popen(args, stdin=subprocess.PIPE,stdout=fnull,stderr=fnull)
-                    prg.communicate(job.body)
+                    for cmd in self.instance['command']:
+                        args = map(self.parse_arg, shlex.split(cmd))
+                        prg = subprocess.Popen(args, stdin=subprocess.PIPE,stdout=fnull,stderr=fnull)
+                        prg.communicate(job.body)
+
                 elif 'file' in self.instance:
                     # Append to file
                     with open(self.instance['file'], 'a') as f:
